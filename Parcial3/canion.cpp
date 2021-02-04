@@ -1,9 +1,13 @@
 #include "canion.h"
 
-Canion::Canion(float px_, float py_, int id_)
+Canion::Canion(float px_, float py_, int id_, float rd, float d_)
 {
     id =id_;
-    if (id == 0){
+    rango=rd;
+    distancia = d_;
+    if (id == 0 || id ==1)
+        r=10;
+    if (id == 0 || id == 2){
         posx=0;
     }
     else
@@ -13,7 +17,10 @@ Canion::Canion(float px_, float py_, int id_)
 
 QRectF Canion::boundingRect() const
 {
-    return QRectF(-r,-r,2*r,2*r);
+    if (id == 1 || id == 0)
+        return QRectF(-r,-r,2*r,2*r);
+    else if (id == 2 || id == 3)
+        return QRectF(-rango*distancia,-rango*distancia,2*rango*distancia,2*rango*distancia);
 }
 
 void Canion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -21,8 +28,12 @@ void Canion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawEllipse(boundingRect());
     if (id==0)
         painter->setBrush(Qt::black);
-    else
+    else if (id == 1)
         painter->setBrush(Qt::darkBlue);
+    else if (id == 2)
+        painter->setBrush(Qt::green);
+    else if (id == 3)
+        painter->setBrush(Qt::cyan);
 }
 
 float Canion::getD() const

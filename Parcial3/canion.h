@@ -9,11 +9,12 @@ class Canion
 {
 private:
     float posx ,posy;
-    float r=10;
-    float d;
+    float r;
+    float rango;
+    float distancia;
     int id;
 public:
-    Canion(float px_,float py_,int id_);
+    Canion(float px_,float py_,int id_,float rd,float d_);
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     float getD() const;

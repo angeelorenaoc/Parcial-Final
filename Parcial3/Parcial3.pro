@@ -13,15 +13,13 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     proyectil.cpp \
-    proyectil_grafico.cpp \
-    rando_danio.cpp
+    proyectil_grafico.cpp
 
 HEADERS += \
     canion.h \
     mainwindow.h \
     proyectil.h \
-    proyectil_grafico.h \
-    rando_danio.h
+    proyectil_grafico.h
 
 FORMS += \
     mainwindow.ui
