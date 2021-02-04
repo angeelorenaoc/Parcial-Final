@@ -43,7 +43,8 @@ private:
 
     QMessageBox msgBox;
 
-    void DisparoOfensivo(Canion DO, Canion DD);
+    void DisparoOfensivo(int Do, int Dd,int ro);
+    void DisparoDefensivo(int Do, int Dd, int rd);
 
     float dt;
     int punto;

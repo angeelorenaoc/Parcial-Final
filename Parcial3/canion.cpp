@@ -1,5 +1,15 @@
 #include "canion.h"
 
+float Canion::getR() const
+{
+    return r;
+}
+
+void Canion::setR(float value)
+{
+    r = value;
+}
+
 Canion::Canion(float px_, float py_, int id_, float rd, float d_)
 {
     id =id_;
@@ -7,6 +17,8 @@ Canion::Canion(float px_, float py_, int id_, float rd, float d_)
     distancia = d_;
     if (id == 0 || id ==1)
         r=10;
+    else
+        r = rango*distancia;
     if (id == 0 || id == 2){
         posx=0;
     }

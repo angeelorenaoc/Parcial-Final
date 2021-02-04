@@ -25,6 +25,8 @@ public:
     void setPosy(float value);
     int getId() const;
     void setId(int value);
+    float getR() const;
+    void setR(float value);
 };
 
 #endif // CANION_H

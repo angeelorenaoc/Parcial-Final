@@ -41,7 +41,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>130</y>
+      <y>100</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -50,21 +50,11 @@
      <string>Cañón defensivo</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="XO">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>50</y>
-      <width>62</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QDoubleSpinBox" name="YO">
     <property name="geometry">
      <rect>
-      <x>720</x>
-      <y>80</y>
+      <x>740</x>
+      <y>50</y>
       <width>62</width>
       <height>22</height>
      </rect>
@@ -73,41 +63,34 @@
    <widget class="QDoubleSpinBox" name="XD">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>160</y>
+      <x>740</x>
+      <y>140</y>
       <width>62</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="minimum">
+     <double>20.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="YD">
     <property name="geometry">
      <rect>
-      <x>730</x>
+      <x>740</x>
       <y>190</y>
       <width>62</width>
       <height>22</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>50</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Posición en x</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>80</y>
+      <y>50</y>
       <width>61</width>
       <height>16</height>
      </rect>
@@ -120,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>160</y>
+      <y>140</y>
       <width>71</width>
       <height>16</height>
      </rect>
