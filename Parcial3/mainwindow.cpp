@@ -99,7 +99,6 @@ void MainWindow::DisparoDefensivo(int Do, int Dd, int rd)
     int flag = 0;
     float e = 0;
     float Vxo,Vy0,xf,yf;
-    float pi = 3.1416, G = 9.8;
     int V0o = 0;
     int t = 0;
     int angulo = 0;
@@ -176,10 +175,71 @@ void MainWindow::DisparoDefensivo2(int DO, int DD, int anguloo, int vo0)
             msgBox.setText("No se encontraron al menos 3 disparos efectivos");
             msgBox.exec();
 }
+}
 
 void MainWindow::DisparoDefensivo3(int DO, int DD, int anguloo, int vo0)
 {
+    int flag = 0;
+    bool flag2 = 0;
+    float x2,y2;
+    float aux,auy, xf,yf;
+    float Vxo,Vy0, Vxoo,Vyoo;
+    int V0o = 0;
+    float t = 2.5;
+    Vxoo = vo0*cos((anguloo)*pi/180);
+    Vyoo = vo0*sin((anguloo)*pi/180);
+    for(V0o = 0; ; V0o +=5){
+        for(int angulo = 0; angulo < 90; angulo++){
+            Vxo = V0o*cos((angulo+90)*pi/180);
+            Vy0 = V0o*sin((angulo+90)*pi/180);
+            xf = 0.0;
+            yf = 0.0;
+            x2 = 0.0;
+            y2 = 0.0;
+            for(t = 0; ; t++){
+                x2 = Vxoo*(t);
+                y2 = DO.getY0() + Vyoo*(t) -(0.5*G*(t)*(t));
+                xf = DD.getX0()+Vxo*t;
+                yf = DD.getY0() + Vy0*t -(0.5*G*t*t);
+                for(int t2 = t; ;t2++){
+                    aux = DD.getX0()+Vxo*t2;
+                    auy = DD.getY0() + Vy0*t2 -(0.5*G*t2*t2);
+                    if(sqrt(pow((DO.getX0() - aux),2)+pow((DO.getY0() - auy),2)) < DD.getD0()){
+                        flag2 = 1;
+                        break;
+                    }
+                    if(auy < 0){
+                        break;
+                    }
+                }
+                if(flag2){
+                    flag2 = 0;
+                    break;
+                }
+                if(sqrt(pow((DD.getX0() - x2),2)+pow((DD.getY0() - y2),2)) < DO.getD0()){
+                    break;
+                }
+                if(sqrt(pow((x2 - xf),2)+pow((y2 - yf),2)) < DD.getD0()){
+                    if(yf<0) yf = 0;
+                    flag += 1;
+                    cout << "Disparo numero " << flag << endl;
+                    ImprimirResultados(anguloo,vo0,x2,y2,t);
+                    cout << "_________________________________"<<endl;
+                    ImprimirResultados(angulo, V0o, xf, yf, t);
+                    break;
+                }
+                if(yf < 0){
+                    break;
+                }
+            }
+            if(flag == 3) break;
 
+        }
+        if(flag == 3) break;
+    }
+    if(flag != 3){
+        cout << "No impacto en los disparos esperados"<< endl;
+    }
 }
 
 void MainWindow::DisparoOfensivo1(int DO, int DD, int anguloo, int vo0, int angulod, int vd0)
@@ -215,15 +275,8 @@ bool MainWindow::Verificacion_impacto(int b, int rd)
 
 void MainWindow::move()
 {
-    /* Recorre la lista de balas y llama al metodo que
-     * cambia su posicion. */
-    for(int i=0;i<balas.size();i++){
-        balas.at(i)->actualizar(v_limit);
-        if (Colisiones_Enemigos(i)){
-            scene->removeItem(balas.at(i));
-            balas.removeAt(i);
-        }
-        else{borderCollisionbala(i);}
+    for(int i=0;i<Proyectiles.size();i++){
+        Proyectiles.at(i)->actualizar(v_limit);
     }
 }
 
@@ -295,5 +348,8 @@ void MainWindow::on_Punto5_clicked()
 
 void MainWindow::on_Iniciar_clicked()
 {
-
+    if(punto==1){
+            DisparoOfensivo(caniones.at(1)->getPosx(),v_limit-caniones.at(1)->getPosy(),caniones.at(0)->getR());
+            timer->start(200);
+        }
 }
