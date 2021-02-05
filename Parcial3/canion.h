@@ -5,7 +5,7 @@
 #include <QPainter>
 #include <QTimer>
 
-class Canion
+class Canion: public QObject, public QGraphicsItem
 {
 private:
     float posx ,posy;

@@ -64,6 +64,7 @@ void MainWindow::DisparoOfensivo(int Do, int Dd, int ro)
     }
     if(flag != 3){
         //cout << "No impacto en los disparos esperados"<< endl;
+        //Imprimir un mensaje de que no se encontró los 3 disparos
     }
 }
 
@@ -102,8 +103,75 @@ void MainWindow::DisparoDefensivo(int Do, int Dd, int rd)
         if(flag == 3) break;
     }
     if(flag != 3){
-       // cout << "No impacto en los disparos esperados"<< endl;
+        // cout << "No impacto en los disparos esperados"<< endl;
+        //Imprimir un mensaje de que no se encontró los 3 disparos
     }
+}
+
+void MainWindow::DisparoDefensivo2(int DO, int DD, int anguloo, int vo0)
+{
+    int flag = 0;
+    float x2,y2,xf,yf;
+    float Vxo,Vy0, Vxoo,Vyoo;
+    int V0o = 0;
+    float t = 2.5;
+    float G=9.8, pi=3.1416;
+    int angulo = 0;
+    Vxoo = vo0*cos((anguloo)*pi/180);
+    Vyoo = vo0*sin((anguloo)*pi/180);
+    for(V0o = 0; V0o < 500 ; V0o +=5){
+        for(angulo = 0; angulo < 90; angulo++){
+            Vxo = V0o*cos((angulo+90)*pi/180);
+            Vy0 = V0o*sin((angulo+90)*pi/180);
+            xf = 0.0;
+            yf = 0.0;
+            x2 = 0.0;
+            y2 = 0.0;
+            for(t = 0; ; t++){
+                x2 = Vxoo*(t);
+                y2 = caniones.at(DO)->getPosy() + Vyoo*(t) -(0.5*G*(t)*(t));
+                xf = caniones.at(DD)->getPosx() + Vxo*t;
+                yf = caniones.at(DD)->getPosy() + Vy0*t -(0.5*G*t*t);
+                if(sqrt(pow((x2 - xf),2)+pow((y2 - yf),2)) < caniones.at(DD)->getR()){
+                    if(yf>0 && y2>0){
+//                    ImprimirResultados(anguloo,vo0,x2,y2,t);
+//                    cout << "_________________________________"<<endl;
+//                    ImprimirResultados(angulo, V0o, xf, yf, t);
+                    //Imprimir los resultados y crear el disparo
+                    flag += 1;
+                    break;}
+                }
+                if(yf < 0){
+                    break;
+                }
+            }
+            if(flag == 3) break;
+
+        }
+        if(flag == 3) break;
+    }
+    if(flag != 3){
+        //cout << "No impacto en los disparos esperados"<< endl;
+        //Si no encuentra los disparos, imprima un mensaje
+    }
+}
+
+void MainWindow::Creacion_caniones()
+{
+    //Caniones
+    //canion ofensivo
+    caniones.push_back(new Canion(10,0,0,0,0));//Organizar el spinbox
+    scene->addItem(caniones.back());
+    //canion defensivo
+    caniones.push_back(new Canion(10,0,1,0,0));//Organizar el spinbox
+    scene->addItem(caniones.back());
+    //Circulo de rango de daño
+    //Rango ofensivo
+    caniones.push_back(new Canion(10,0,2,0.025,0));//Organizar el spinbox
+    scene->addItem(caniones.back());
+    //Rango defensivo
+    caniones.push_back(new Canion(10,0,3,0.05,0));//Organizar el spinbox
+    scene->addItem(caniones.back());
 }
 
 
