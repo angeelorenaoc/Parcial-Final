@@ -29,6 +29,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+
+    void move();
+
 private slots:
     void on_Punto1_clicked();
     void on_Punto2_clicked();
@@ -43,17 +47,21 @@ private:
 
     QMessageBox msgBox;
 
-    void DisparoOfensivo(int Do, int Dd,int ro);
+    void DisparoOfensivo(float XD, float YD, float R);
     void DisparoDefensivo(int Do, int Dd, int rd);
     void DisparoDefensivo2(int DO, int DD, int anguloo, int vo0);
-    void DisparoDefensivo3(Canion DO,Canion DD, int V00, int anguloo, int vo0);
-    void DisparoOfensivo1(Canion DO,Canion DD, int V00, int anguloo, int vo0, int angulod, int vd0);
+    void DisparoDefensivo3(int DO,int DD, int anguloo, int vo0);
+    void DisparoOfensivo1(int DO,int DD, int anguloo, int vo0, int angulod, int vd0);
     void Creacion_caniones();
+    bool Verificacion_impacto(int b, int rd);
+    bool Impacto(float XO, float YO, float XD, float YD, float Rang);
 
     float dt;
     int punto;
     int h_limit;
     int v_limit;
+
+    QTimer *timer;
 
     QList <Canion*> caniones;
     QList <Proyectil_grafico*> Proyectiles;

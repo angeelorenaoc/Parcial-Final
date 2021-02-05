@@ -25,19 +25,16 @@ Canion::Canion(float px_, float py_, int id_, float rd, float d_)
     else
         posx = px_;
     posy = py_;
+    setPos(posx,posy);
 }
 
 QRectF Canion::boundingRect() const
 {
-    if (id == 1 || id == 0)
-        return QRectF(-r,-r,2*r,2*r);
-    else if (id == 2 || id == 3)
-        return QRectF(-rango*distancia,-rango*distancia,2*rango*distancia,2*rango*distancia);
+    return QRectF(-r,-r,2*r,2*r);
 }
 
 void Canion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawEllipse(boundingRect());
     if (id==0)
         painter->setBrush(Qt::black);
     else if (id == 1)
@@ -46,16 +43,17 @@ void Canion::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         painter->setBrush(Qt::green);
     else if (id == 3)
         painter->setBrush(Qt::cyan);
+    painter->drawEllipse(boundingRect());
 }
 
-float Canion::getD() const
+float Canion::getDistancia() const
 {
-    return d;
+    return distancia;
 }
 
-void Canion::setD(float value)
+void Canion::setDistancia(float value)
 {
-    d = value;
+    distancia = value;
 }
 
 float Canion::getPosx() const

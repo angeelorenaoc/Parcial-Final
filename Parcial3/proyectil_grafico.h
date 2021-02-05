@@ -15,8 +15,7 @@
 class Proyectil_grafico: public QObject, public QGraphicsItem
 {
 public:
-public:
-    Proyectil_grafico(float px, float py,float ang,float v, int id_);
+    Proyectil_grafico(float px, float py,float ang,float v, int id_, float d_);
     ~Proyectil_grafico();
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -27,6 +26,7 @@ public:
 
 private:
     Proyectil *bala;
+    float d;
     int id;
 };
 

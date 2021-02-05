@@ -17,8 +17,8 @@ public:
     Canion(float px_,float py_,int id_,float rd,float d_);
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    float getD() const;
-    void setD(float value);
+    float getDistancia() const;
+    void setDistancia(float value);
     float getPosx() const;
     void setPosx(float value);
     float getPosy() const;

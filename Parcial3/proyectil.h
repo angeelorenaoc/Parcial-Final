@@ -19,6 +19,7 @@ class Proyectil: public QObject
     float g; //Gravedad
     float v;
     float dt; //Delta de tiempo
+
 public:
     Proyectil(float posx_, float posy_,float a_,float v_);
     ~Proyectil();

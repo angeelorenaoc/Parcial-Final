@@ -1,12 +1,13 @@
 #include "proyectil_grafico.h"
 
-Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int id_)
+Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int id_, float d_)
 {
     float posx,posy,r;
     id = id_;
     posx = px;
     posy = py;
     setPos(posx,posy);
+    d=d_;
     r = 5;
 
     //Se crea un instacia de la clase bala_parabolica
