@@ -8,7 +8,12 @@ Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int
     posy = py;
     setPos(posx,posy);
     d=d_;
-    r = 5;
+    if(id == 0 || id == 1)
+        r = 1;
+    else if (id == 2)
+        r = 0.05*d;
+    else
+        r=0.025*d;
 
     //Se crea un instacia de la clase bala_parabolica
     bala = new Proyectil(posx,posy,ang,v);

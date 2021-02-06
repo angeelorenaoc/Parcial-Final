@@ -16,7 +16,7 @@ Canion::Canion(float px_, float py_, int id_, float rd, float d_)
     rango=rd;
     distancia = d_;
     if (id == 0 || id ==1)
-        r=10;
+        r=1;
     else
         r = rango*distancia;
     if (id == 0 || id == 2){
