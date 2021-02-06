@@ -7,18 +7,17 @@ Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int
     posx = px;
     posy = py;
     setPos(posx,posy);
-    d=d_;
+    d=d_-30;
     if(id == 0 || id == 1)
-        r = 1;
+        r = 2;
     else if (id == 2)
         r = 0.05*d;
     else if (id==3)
         r=0.025*d;
     else
         r = 0.005*d;
-
     //Se crea un instacia de la clase bala_parabolica
-    bala = new Proyectil(posx,posy,ang,v);
+    bala = new Proyectil(posx,posy,ang,v,r);
 }
 
 void Proyectil_grafico::actualizar(float v_limit)
@@ -40,11 +39,11 @@ QRectF Proyectil_grafico::boundingRect() const
 
 void Proyectil_grafico::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawEllipse(boundingRect());
-    if (id==0)
-        painter->setBrush(Qt::black);
-    else
+    if (id==2 || id == 4)
+        painter->setBrush(Qt::darkMagenta);
+    else if (id == 3)
         painter->setBrush(Qt::darkBlue);
+    painter->drawEllipse(boundingRect());
 }
 
 int Proyectil_grafico::getId() const

@@ -1,16 +1,11 @@
 #include "proyectil.h"
 #define pi 3.1416
 
-float Proyectil::getV() const
-{
-    return v;
-}
-
-Proyectil::Proyectil(float posx_, float posy_, float a_, float v_)
+Proyectil::Proyectil(float posx_, float posy_, float a_, float v_, float r_)
 {
     px =posx_;
     py = posy_;
-    r=10;
+    r=r_;
     angulo = (a_*pi)/180;
     v = v_;
     vx=0;
@@ -19,6 +14,12 @@ Proyectil::Proyectil(float posx_, float posy_, float a_, float v_)
     g = 9.8;
     dt = 0.1;
 }
+
+float Proyectil::getV() const
+{
+    return v;
+}
+
 
 Proyectil::~Proyectil()
 {
@@ -73,16 +74,6 @@ void Proyectil::setPy(float value)
 float Proyectil::getR() const
 {
     return r;
-}
-
-float Proyectil::getVx() const
-{
-    return vx;
-}
-
-float Proyectil::getVy() const
-{
-    return vy;
 }
 
 float Proyectil::getAngulo() const

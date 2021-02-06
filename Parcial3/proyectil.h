@@ -21,7 +21,7 @@ class Proyectil: public QObject
     float dt; //Delta de tiempo
 
 public:
-    Proyectil(float posx_, float posy_,float a_,float v_);
+    Proyectil(float posx_, float posy_,float a_,float v_,float r_);
     ~Proyectil();
     void ActualizarPosicion();
     void CalcularVelocidad();
