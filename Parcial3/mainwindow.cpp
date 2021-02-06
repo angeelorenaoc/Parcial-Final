@@ -133,48 +133,45 @@ void MainWindow::DisparoDefensivo(int Do, int Dd, int rd)
     }
 }
 
-void MainWindow::DisparoDefensivo2(int DO, int DD, int anguloo, int vo0)
+void MainWindow::DisparoDefensivo2(int anguloo, int vo0)
 {
     int flag = 0;
-        float xf,yf;
-        float Vxo,Vy0;
-        int V0o = 0;
-        int t = 0;
-        int angulo = 0;
-        for(V0o = 0; V0o < 500 ; V0o+=5){
-            for(angulo = 0; angulo < 90; angulo++){
-                Vxo = V0o*cos(angulo*pi/180);
-                Vy0 = V0o*sin(angulo*pi/180);
-                xf = 0.0;
-                yf = 0.0;
-                for(t = 0; ; t++){
-                    xf = 10+Vxo*t;
-    //                qDebug()<<Canones.at(0)->getPosy() + Vy0*t -(0.5*G*t*t)<<v_limit-Canones.at(0)->getPosy() + Vy0*t -(0.5*G*t*t)<<v_limit-(Canones.at(0)->getPosy() + Vy0*t -(0.5*G*t*t));
-                    yf = (v_limit-Canones.at(0)->getPosy()) + Vy0*t -(0.5*G*t*t);
-                    if(Impacto(xf,yf,XD,YD,R)){
-                        qDebug()<<xf<<yf<<XD<<YD;
-                        qDebug()<<R;
-                        Disparos.push_back(new Proyectil_Graph(10,ui->PYO->value(),angulo,V0o,XD,1));
-                        scene->addItem(Disparos.back());
-                        Disparos.push_back(new Proyectil_Graph(10,ui->PYO->value(),angulo,V0o,XD,3));
-                        scene->addItem(Disparos.back());
-                        flag += 1;
-                        V0o += 50;
-                        break;
-                    }
-                    if(yf < 0 || xf>XD+R){
-                        break;
-                    }
+    float Vxo,Vy0,xf,yf;
+    int V0o = 0;
+    int t = 0;
+    int angulo = 0;
+    for(V0o = 0;V0o < 500; V0o+=5){
+        for(angulo = 0; angulo < 90; angulo++){
+            Vxo = V0o*cos((angulo+90)*pi/180);
+            Vy0 = V0o*sin((angulo+90)*pi/180);
+            xf = 0.0;
+            yf = 0.0;
+            for(t = 0; ; t++){
+                xf = caniones.at(1)->getPosx()+Vxo*t;
+                yf = (v_limit-caniones.at(1)->getPosy()) + Vy0*t -(0.5*G*t*t);
+                if(Impacto(xf,yf,10,YO,R)){
+                    qDebug()<<xf<<yf<<10<<YO<<R;
+                    Disparos.push_back(new Proyectil_Graph(XD,YD,angulo+90,V0o,XD,2));
+                    scene->addItem(Disparos.back());
+                    Disparos.push_back(new Proyectil_Graph(XD,YD,angulo+90,V0o,XD,4));
+                    scene->addItem(Disparos.back());
+                    flag += 1;
+                    V0o += 50;
+                    break;
                 }
-                if(flag == 3) break;
-
+                if(yf < 0 || xf>XD+R){
+                    break;
+                }
             }
             if(flag == 3) break;
+
         }
-        if(flag < 3){
-            msgBox.setText("No se encontraron al menos 3 disparos efectivos");
-            msgBox.exec();
-}
+        if(flag == 3) break;
+    }
+    if(flag < 3){
+        msgBox.setText("No se encontraron al menos 3 disparos efectivos");
+        msgBox.exec();
+    }
 }
 
 void MainWindow::DisparoDefensivo3(int DO, int DD, int anguloo, int vo0)

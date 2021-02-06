@@ -49,7 +49,7 @@ private:
 
     void DisparoOfensivo(float XD, float YD, float R);
     void DisparoDefensivo(int Do, int Dd, int rd);
-    void DisparoDefensivo2(int DO, int DD, int anguloo, int vo0);
+    void DisparoDefensivo2(int anguloo, int vo0);
     void DisparoDefensivo3(int DO,int DD, int anguloo, int vo0);
     void DisparoOfensivo1(int DO,int DD, int anguloo, int vo0, int angulod, int vd0);
     void Creacion_caniones();
