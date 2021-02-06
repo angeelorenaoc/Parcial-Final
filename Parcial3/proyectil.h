@@ -30,11 +30,10 @@ public:
     float getPy() const;
     void setPy(float value);
     float getR() const;
-    float getVx() const;
-    float getVy() const;
     float getAngulo() const;
     void setAngulo(float value);
     void set_vel(float vx_,float vy_, float px_,float py_);
+    float getV() const;
 };
 
 #endif // PROYECTIL_H

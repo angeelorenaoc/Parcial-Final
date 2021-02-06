@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    Camino = new QTimer;
+    connect(Camino,SIGNAL(timeout()),this,SLOT(ruta()));
 }
 
 MainWindow::~MainWindow()
@@ -263,7 +265,85 @@ void MainWindow::DisparoDefensivo3(int anguloo, int vo0)
 
 void MainWindow::DisparoOfensivo1(int anguloo, int vo0, int angulod, int vd0)
 {
+    int flag = 0;
+    bool flag2;
+    float xf,yf, x2,y2, x3,y3;
+    float aux,auy;
+    float Vxo,Vy0, Vxoo,Vyoo,Vxd,Vyd;
+    int V0o = 0;
+    int Time = 2, time3=3, t2;
+    float angulo = 0;
+    Vxoo = vo0*cos((anguloo)*pi/180);
+    Vyoo = vo0*sin((anguloo)*pi/180);
+    Vxd= vd0*cos((angulod+90)*pi/180);
+    Vyd= vd0*sin((angulod+90)*pi/180);
+    for(V0o = 0;V0o<500; V0o +=5){
+        for(angulo = 0; angulo < 90; angulo++){
+            Vxo = V0o*cos((angulo)*pi/180);
+            Vy0 = V0o*sin((angulo)*pi/180);
+            xf = 0.0;
+            yf = 0.0;
+            x3 = 0.0;
+            y3 = 0.0;
+            x2 = 0.0;
+            y2 = 0.0;
+            for(int t=0; ; t++){
+                x3 = caniones.at(1)->getPosx()+Vxo*t;
+                y3 = (v_limit-caniones.at(1)->getPosy()) + Vy0*t -(0.5*G*t*t);
+                x2 = caniones.at(0)->getPosx()+Vxoo*(t+Time);
+                y2 = (v_limit-caniones.at(0)->getPosy()) + Vyoo*(t+Time) -(0.5*G*(t+Time)*(t+Time));
+                xf = caniones.at(0)->getPosx()+Vxoo*(t+time3);
+                yf = (v_limit-caniones.at(0)->getPosy()) + Vyoo*(t+time3) -(0.5*G*(t+time3)*(t+time3));
 
+                if(flag2){
+                    flag2 = 0;
+                    break;
+                }
+                if(!Impacto(x3,y3,x2,y2,caniones.at(2)->getR())){
+                    //Desarrollar aqui el for
+                    for(t2 = t; ;t2++){
+                        aux = caniones.at(0)->getPosx()+Vxo*t2;
+                        auy = caniones.at(1)->getPosy() + Vy0*t2 -(0.5*G*t2*t2);
+                        if(Impacto(x2,y2,aux,auy,caniones.at(2)->getR())){
+                            flag2 = 1;
+                            break;
+                        }
+                        if(auy < 0){
+                            break;
+                        }
+                    }
+                    if (Impacto(xf,yf,x3,y3,caniones.at(3)->getR())){
+                        Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),angulo,V0o,0,caniones.at(1)->getPosx()));
+                        scene->addItem(Proyectiles.back());
+                        Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),angulo,V0o,4,caniones.at(1)->getPosx()));
+                        scene->addItem(Proyectiles.back());
+                        flag += 1;
+                        V0o += 50;
+                        break;
+                    }
+
+                }
+                if(yf < 0){
+                    break;
+                }
+            }
+            if(flag == 3) break;
+
+        }
+        if(flag == 3) break;
+    }
+    if(flag < 3){
+        msgBox.setText("No se encontraron al menos 3 disparos efectivos");
+        msgBox.exec();
+    }
+
+}
+void MainWindow::ruta()
+{
+    for(int i=0;i<Proyectiles.size();i++){
+        Respaldo.push_back(new Proyectil_grafico(Proyectiles.at(i)->getBala()->getPx(),v_limit-Proyectiles.at(i)->getBala()->getPy(),Proyectiles.at(i)->getBala()->getAngulo(),Proyectiles.at(i)->getBala()->getV(),Proyectiles.at(i)->getId(),caniones.at(1)->getPosx()));
+        scene->addItem(Respaldo.back());
+    }
 }
 
 void MainWindow::Creacion_caniones()
@@ -302,6 +382,9 @@ void MainWindow::move()
 
 void MainWindow::on_Punto1_clicked()
 {
+    scene->clear();
+    caniones.clear();
+    Proyectiles.clear();
     msgBox.setText("Generar disparos ofensivos que comprometan la integridad del cañón defensivo.");
     msgBox.exec();
     Creacion_caniones();
@@ -311,6 +394,9 @@ void MainWindow::on_Punto1_clicked()
 
 void MainWindow::on_Punto2_clicked()
 {
+    scene->clear();
+    caniones.clear();
+    Proyectiles.clear();
     msgBox.setText("Generar disparos defensivos que comprometan la integridad del cañón ofensivo.");
     msgBox.exec();
     Creacion_caniones();
@@ -320,6 +406,9 @@ void MainWindow::on_Punto2_clicked()
 
 void MainWindow::on_Punto3_clicked()
 {
+    scene->clear();
+    caniones.clear();
+    Proyectiles.clear();
     msgBox.setText("Dado un disparo ofensivo, generar disparos defensivos que impida que "
                    "el cañón defensivo sea destruido sin importar si el cañón ofensivo pueda ser destruido.");
     msgBox.exec();
@@ -334,6 +423,9 @@ void MainWindow::on_Punto3_clicked()
 
 void MainWindow::on_Punto4_clicked()
 {
+    scene->clear();
+    caniones.clear();
+    Proyectiles.clear();
     msgBox.setText("Dado un disparo ofensivo, generar disparo defensivos que impidan que los cañones "
                    "defensivo y ofensivo puedan ser destruidos.");
     msgBox.exec();
@@ -348,6 +440,9 @@ void MainWindow::on_Punto4_clicked()
 
 void MainWindow::on_Punto5_clicked()
 {
+    scene->clear();
+    caniones.clear();
+    Proyectiles.clear();
     msgBox.setText("Dado un disparo ofensivo efectivo y un disparo defensivo que comprometa la "
                    "efectividad del ataque ofensivo, generar disparos que neutralicen el ataque defensivo "
                    "y permitan que el ataque ofensivo sea efectivo.");

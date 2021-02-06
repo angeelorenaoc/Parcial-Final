@@ -12,8 +12,10 @@ Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int
         r = 1;
     else if (id == 2)
         r = 0.05*d;
-    else
+    else if (id==3)
         r=0.025*d;
+    else
+        r = 0.005*d;
 
     //Se crea un instacia de la clase bala_parabolica
     bala = new Proyectil(posx,posy,ang,v);

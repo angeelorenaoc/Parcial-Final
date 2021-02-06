@@ -1,6 +1,11 @@
 #include "proyectil.h"
 #define pi 3.1416
 
+float Proyectil::getV() const
+{
+    return v;
+}
+
 Proyectil::Proyectil(float posx_, float posy_, float a_, float v_)
 {
     px =posx_;

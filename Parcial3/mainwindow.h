@@ -32,6 +32,7 @@ public:
 public slots:
 
     void move();
+    void ruta();
 
 private slots:
     void on_Punto1_clicked();
@@ -62,8 +63,10 @@ private:
     int v_limit;
 
     QTimer *timer;
+    QTimer *Camino;
 
     QList <Canion*> caniones;
     QList <Proyectil_grafico*> Proyectiles;
+    QList <Proyectil_grafico*> Respaldo;
 };
 #endif // MAINWINDOW_H
