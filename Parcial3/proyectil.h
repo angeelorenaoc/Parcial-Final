@@ -6,6 +6,8 @@
 #include <cmath>
 #include <QDebug>
 
+//Clase que maneja las fisicas del proyectil y los rangos de danio de estos
+
 class Proyectil: public QObject
 {
     Q_OBJECT

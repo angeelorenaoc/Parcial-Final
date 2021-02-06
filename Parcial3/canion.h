@@ -5,6 +5,8 @@
 #include <QPainter>
 #include <QTimer>
 
+/*Clase que crea los caniones y los rangos de danio de cada canion*/
+
 class Canion: public QObject, public QGraphicsItem
 {
 private:

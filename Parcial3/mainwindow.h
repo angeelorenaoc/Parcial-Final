@@ -31,8 +31,8 @@ public:
 
 public slots:
 
-    void move();
-    void ruta();
+    void move();//Metodo que permite la actualizacion de  la posicion de las balas
+    void ruta();//Metodo que grafica la trayectoria de las balas
 
 private slots:
     void on_Punto1_clicked();
@@ -47,14 +47,14 @@ private:
     QGraphicsScene *scene = new QGraphicsScene(this);
 
     QMessageBox msgBox;
-
-    void DisparoOfensivo();
-    void DisparoDefensivo();
-    void DisparoDefensivo2(int anguloo, int vo0);
-    void DisparoDefensivo3(int anguloo, int vo0);
-    void DisparoOfensivo1(int anguloo, int vo0, int angulod, int vd0);
+    //-------------------------Metodos de simulacion----------------------------
+    void DisparoOfensivo();//Punto 1
+    void DisparoDefensivo();//Punto 2
+    void DisparoDefensivo2(int anguloo, int vo0);//Punto 3
+    void DisparoDefensivo3(int anguloo, int vo0);//Punto 4
+    void DisparoOfensivo1(int anguloo, int vo0, int angulod, int vd0);//Punto 5
+    //---------------------------------------------------------------------------
     void Creacion_caniones();
-    bool Verificacion_impacto(int b, int rd);
     bool Impacto(float XO, float YO, float XD, float YD, float Rang);
 
     float dt;
@@ -65,8 +65,9 @@ private:
     QTimer *timer;
     QTimer *Camino;
 
-    QList <Canion*> caniones;
-    QList <Proyectil_grafico*> Proyectiles;
-    QList <Proyectil_grafico*> Respaldo;
+    QList <Canion*> caniones;// Lista de caniones y rangos de danio
+    QList <Proyectil_grafico*> Proyectiles;//Lista de balas
+    QList <Proyectil_grafico*> Respaldo;/* Lista de Respaldo para que la trayectoria
+                                           de la bala aparezca en escena*/
 };
 #endif // MAINWINDOW_H

@@ -7,7 +7,9 @@ Proyectil_grafico::Proyectil_grafico(float px, float py, float ang, float v, int
     posx = px;
     posy = py;
     setPos(posx,posy);
-    d=d_-30;
+    d=d_-30;//Distancia entre los caniones
+    /* El id es usado para identificar si lo que debe graficarse es un rango de danio o la bala.
+     * Además tambien se usa para saber cuál es el rango de danio especifico y a qué canion pertenece la bala*/
     if(id == 0 || id == 1)
         r = 2;
     else if (id == 2)

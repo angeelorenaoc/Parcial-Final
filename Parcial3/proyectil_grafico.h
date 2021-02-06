@@ -12,6 +12,8 @@
 #include <QDebug>
 #include "proyectil.h"
 
+//Parte grafica del proyectil y el rando de este
+
 class Proyectil_grafico: public QObject, public QGraphicsItem
 {
 public:

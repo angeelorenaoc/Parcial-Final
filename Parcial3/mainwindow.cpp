@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     h_limit = 900;
     v_limit = 650;
 
+    //Configuracion de la escena
     scene->setSceneRect(0,0,h_limit,v_limit);
     ui->graphicsView->setScene(scene);
     ui->centralwidget->adjustSize();
@@ -60,6 +61,7 @@ void MainWindow::DisparoOfensivo()
     int V0o = 0;
     int t = 0;
     int angulo = 0;
+
     for(V0o = 0; V0o < 500 ; V0o+=5){
         for(angulo = 0; angulo < 90; angulo++){
             Vxo = V0o*cos(angulo*pi/180);
@@ -70,7 +72,6 @@ void MainWindow::DisparoOfensivo()
                 xf = caniones.at(0)->getPosx()+Vxo*t;
                 yf = (v_limit-caniones.at(0)->getPosy()) + Vy0*t -(0.5*G*t*t);
                 if(Impacto(xf,yf,caniones.at(1)->getPosx(),caniones.at(1)->getPosy(),caniones.at(2)->getR())){
-                    qDebug() << "Se crea el disparo";
                     Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),angulo,V0o,2,caniones.at(1)->getPosx()));
                     scene->addItem(Proyectiles.back());
                     Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),angulo,V0o,0,caniones.at(1)->getPosx()));
@@ -244,7 +245,6 @@ void MainWindow::DisparoDefensivo3(int anguloo, int vo0)
                 }
 
                 if(Impacto(xf,yf,x2,y2,caniones.at(2)->getR())){
-                    qDebug() << "Disparo creado";
                     Proyectiles.push_back(new Proyectil_grafico(caniones.at(1)->getPosx(),v_limit-caniones.at(1)->getPosy(),angulo+90,V0o,1,caniones.at(1)->getPosx()));
                     scene->addItem(Proyectiles.back());
                     Proyectiles.push_back(new Proyectil_grafico(caniones.at(1)->getPosx(),v_limit-caniones.at(1)->getPosy(),angulo+90,V0o,3,caniones.at(1)->getPosx()));
@@ -365,18 +365,8 @@ void MainWindow::Creacion_caniones()
     for (int i=3; i>=0; i--){
         scene->addItem(caniones.at(i));
     }
-    ui->XD->clear();
-    ui->YD->clear();
-    ui->YO->clear();
 }
 
-bool MainWindow::Verificacion_impacto(int b, int rd)
-{
-    if (Proyectiles.at(b)->collidesWithItem(caniones.at(rd))){
-        return true;
-    }
-    return false;
-}
 
 void MainWindow::move()
 {
@@ -484,6 +474,8 @@ void MainWindow::on_Iniciar_clicked()
         Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),ui->AnguloO->value(),ui->VelocidadO->value(),2,caniones.at(1)->getPosx()));
         scene->addItem(Proyectiles.back());
         timer->start(100);
+        ui->AnguloO->clear();
+        ui->VelocidadO->clear();
     }
     else if (punto == 4){
         DisparoDefensivo3(ui->AnguloO->value(),ui->VelocidadO->value());
@@ -492,6 +484,8 @@ void MainWindow::on_Iniciar_clicked()
         Proyectiles.push_back(new Proyectil_grafico(caniones.at(0)->getPosx(),v_limit-caniones.at(0)->getPosy(),ui->AnguloO->value(),ui->VelocidadO->value(),2,caniones.at(1)->getPosx()));
         scene->addItem(Proyectiles.back());
         timer->start(100);
+        ui->AnguloO->clear();
+        ui->VelocidadO->clear();
     }
     else if (punto == 5){
         DisparoOfensivo1(ui->AnguloO->value(),ui->VelocidadO->value(), ui->AnguloD->value(), ui->VelocidadD->value());
@@ -504,6 +498,13 @@ void MainWindow::on_Iniciar_clicked()
         Proyectiles.push_back(new Proyectil_grafico(caniones.at(3)->getPosx(),v_limit-caniones.at(3)->getPosy(),ui->AnguloD->value(),ui->VelocidadD->value(),3,caniones.at(1)->getPosx()));
         scene->addItem(Proyectiles.back());
         timer->start(100);
+        ui->AnguloO->clear();
+        ui->VelocidadO->clear();
+        ui->AnguloD->clear();
+        ui->VelocidadD->clear();
     }
     Camino->start(500);
+    ui->XD->clear();
+    ui->YD->clear();
+    ui->YO->clear();
 }
