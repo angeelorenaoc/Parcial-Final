@@ -249,6 +249,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <double>90.000000000000000</double>
+    </property>
    </widget>
    <widget class="QLabel" name="TEXTOAO">
     <property name="geometry">
@@ -271,6 +274,9 @@
       <width>51</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
     </property>
    </widget>
    <widget class="QLabel" name="TEXTOVO">
@@ -308,6 +314,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <double>90.000000000000000</double>
+    </property>
    </widget>
    <widget class="QLabel" name="TEXTOVD">
     <property name="geometry">
@@ -330,6 +339,9 @@
       <width>51</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
     </property>
    </widget>
    <widget class="Line" name="line">
